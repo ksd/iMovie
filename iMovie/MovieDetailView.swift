@@ -10,13 +10,18 @@
 import SwiftUI
 
 struct MovieDetailView: View {
-    let movie: Movie
+    @Binding var movie: Movie
     var body: some View {
-        Text(movie.title)
-            .font(.largeTitle)
+        HStack {
+            FavoriteView(isSet: $movie.isFavorite)
+
+            Text(movie.title)
+                .font(.largeTitle)
+
+        }
     }
 }
 
 #Preview {
-    MovieDetailView(movie: MovieController().movies[2])
+    MovieDetailView(movie: .constant(TestData.movies[2]))
 }

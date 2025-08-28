@@ -10,15 +10,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var movieController = MovieController()
+    @Environment(MovieViewModel.self) private var viewModel
+
     var body: some View {
+        @Bindable var viewModel = viewModel
         NavigationStack {
             List {
-                ForEach(movieController.movies) { movie in
+                ForEach($viewModel.movies) { movie in
                     NavigationLink {
                         MovieDetailView(movie: movie)
                     } label: {
-                        MovieRowView(movie)
+                        MovieRowView(movie: movie)
                     }
 
                 }
@@ -29,5 +31,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView().environment(MovieViewModel())
 }
