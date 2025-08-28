@@ -12,10 +12,21 @@ import SwiftUI
 struct FavoriteView: View {
     @Binding var isSet: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            isSet.toggle()
+        } label: {
+            Label("Toggle Favorite", systemImage: isSet ? "heart.fill" : "heart")
+                .labelStyle(.iconOnly)
+                .font(.largeTitle)
+                .foregroundStyle(isSet ? .red : .secondary)
+        }
+
     }
 }
 
-#Preview {
-    FavoriteView()
+#Preview("Favorite") {
+    Group {
+        FavoriteView(isSet: .constant(true))
+        FavoriteView(isSet: .constant(false))
+    }
 }

@@ -10,11 +10,7 @@
 import SwiftUI
 
 struct MovieRowView: View {
-    let movie: Movie
-
-    init(_ movie: Movie) {
-        self.movie = movie
-    }
+    @Binding var movie: Movie
 
     var body: some View {
         HStack(spacing: 24) {
@@ -24,12 +20,13 @@ struct MovieRowView: View {
                 title: movie.title,
                 director: movie.director,
                 genre: movie.genre,
-                runtime: movie.runtime
+                runtime: movie.runtime,
+                isFavorite: $movie.isFavorite
             )
         }
     }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    MovieRowView(MovieController().movies[2])
+    MovieRowView(movie: .constant(TestData.movies[2]))
 }

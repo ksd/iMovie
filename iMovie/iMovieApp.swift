@@ -11,9 +11,10 @@ import SwiftUI
 
 @main
 struct iMovieApp: App {
+    @State private var viewModel = MovieViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environment(viewModel)
         }
     }
 }

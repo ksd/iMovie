@@ -22,11 +22,20 @@ struct Movie: Identifiable {
     let country: String
     let awards: String
     let poster: String
+    var isFavorite = false
 }
 
-class MovieController {
+@Observable
+class MovieViewModel {
+    var movies = TestData.movies
 
-    let movies = [
+    func move(){}
+    func delete(){}
+}
+
+
+struct TestData {
+    static var movies = [
         Movie(title: "Alita: Battle Angel",
               year: "2019",
               runtime: "122 min",
