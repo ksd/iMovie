@@ -14,15 +14,15 @@ struct SideInfoView: View {
     let director: String
     let genre: String
     let runtime: String
-    @Binding var isFavorite: Bool
+    let isFavorite: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            HStack{
+            HStack {
                 Text(title)
                     .font(.headline)
                 Spacer()
-                FavoriteView(isSet: $isFavorite)
+                Image(systemName: isFavorite ? "heart.fill" : "heart")
             }
             Text(director)
                 .font(.subheadline)
@@ -41,5 +41,5 @@ struct SideInfoView: View {
                  director: TestData.movies[0].director,
                  genre: TestData.movies[0].genre,
                  runtime: TestData.movies[0].runtime,
-                 isFavorite: .constant(true))
+                 isFavorite: TestData.movies[0].isFavorite)
 }

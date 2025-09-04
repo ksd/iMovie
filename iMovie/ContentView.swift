@@ -11,21 +11,33 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(MovieViewModel.self) private var viewModel
+    @State private var navigationPath: [Movie] = []
 
     var body: some View {
-        @Bindable var viewModel = viewModel
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             List {
-                ForEach($viewModel.movies) { movie in
-                    NavigationLink {
-                        MovieDetailView(movie: movie)
-                    } label: {
+                ForEach(viewModel.movies) { movie in
+                    NavigationLink(value: movie) {
                         MovieRowView(movie: movie)
                     }
-
                 }
             }
+            .navigationDestination(for: Movie.self, destination: { theMovie in
+                MovieDetailView(movie: theMovie)
+            })
             .navigationTitle("MovieList")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing){
+                    Button {
+                        print("Hello World - nu opretter vi en movie")
+                    } label: {
+                        Image(systemName: "plus.circle")
+                    }
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+            }
         }
     }
 }

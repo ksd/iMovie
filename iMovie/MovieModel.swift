@@ -10,7 +10,7 @@
 import Foundation
 
 
-struct Movie: Identifiable {
+struct Movie: Identifiable, Hashable {
     let id = UUID()
     let title: String
     let year: String
@@ -31,6 +31,12 @@ class MovieViewModel {
 
     func move(){}
     func delete(){}
+    func findIndexFor(movie: Movie) -> Int {
+        return movies.firstIndex { originalMovie in
+            originalMovie.id == movie.id
+        }!
+    }
+
 }
 
 

@@ -10,18 +10,25 @@
 import SwiftUI
 
 struct MovieDetailView: View {
-    @Binding var movie: Movie
+    var movie: Movie
+    @Environment(MovieViewModel.self) private var viewModel
+
     var body: some View {
+        @Bindable var viewModel = viewModel
         HStack {
-            FavoriteView(isSet: $movie.isFavorite)
+            FavoriteView(
+                isSet: $viewModel
+                    .movies[viewModel.findIndexFor(movie: movie)].isFavorite
+            )
 
             Text(movie.title)
                 .font(.largeTitle)
+
 
         }
     }
 }
 
 #Preview {
-    MovieDetailView(movie: .constant(TestData.movies[2]))
+    MovieDetailView(movie: TestData.movies[0]).environment(MovieViewModel())
 }
