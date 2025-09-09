@@ -29,8 +29,22 @@ struct Movie: Identifiable, Hashable {
 class MovieViewModel {
     var movies = TestData.movies
 
+    var favoriteMovies: [Movie] {
+        movies.filter{$0.isFavorite}
+    }
+
     func move(){}
-    func delete(){}
+
+    func delete(movie: Movie){
+        let index = findIndexFor(movie: movie)
+        movies.remove(at: index)
+    }
+
+    func toggleFavorite(movie: Movie){
+        let index = findIndexFor(movie: movie)
+        movies[index].isFavorite.toggle()
+    }
+
     func findIndexFor(movie: Movie) -> Int {
         return movies.firstIndex { originalMovie in
             originalMovie.id == movie.id

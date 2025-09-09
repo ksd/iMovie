@@ -17,8 +17,7 @@ struct MovieDetailView: View {
         @Bindable var viewModel = viewModel
         HStack {
             FavoriteView(
-                isSet: $viewModel
-                    .movies[viewModel.findIndexFor(movie: movie)].isFavorite
+                isSet: $viewModel.movies[viewModel.findIndexFor(movie: movie)].isFavorite
             )
 
             Text(movie.title)

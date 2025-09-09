@@ -23,6 +23,7 @@ struct SideInfoView: View {
                     .font(.headline)
                 Spacer()
                 Image(systemName: isFavorite ? "heart.fill" : "heart")
+                    .foregroundStyle(.red)
             }
             Text(director)
                 .font(.subheadline)
