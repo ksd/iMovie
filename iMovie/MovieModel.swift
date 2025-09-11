@@ -51,6 +51,10 @@ class MovieViewModel {
         }!
     }
 
+    func add(movie: Movie){
+        movies.append(movie)
+    }
+
 }
 
 
